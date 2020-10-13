@@ -1,7 +1,7 @@
-version: '2'
+version: "2"
 services:
   apache:
-    image: rafaelcgstz/magento2
+    image: lucaspaiva1/magento24
     # build: .
     ports:
       - "80:80" # web
@@ -13,7 +13,7 @@ services:
       - ~/.npm:/var/www/.npm
       # - ~/.nvm:/var/www/.nvm
     environment:
-      XDEBUG_CONFIG: "remote_host=10.254.254.254 remote_connect_back=0"      
+      XDEBUG_CONFIG: "remote_host=10.254.254.254 remote_connect_back=0"
       PHP_IDE_CONFIG: "serverName=Docker"
     depends_on:
       - db
@@ -25,7 +25,7 @@ services:
   db:
     image: mariadb
     ports:
-     - 3300:3306
+      - 3300:3306
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=magento
@@ -39,26 +39,26 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-     - PMA_HOST=db
-     - PMA_USER=root
-     - PMA_PASSWORD=root
-     - MYSQL_ROOT_PASSWORD=root
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
     ports:
-     - 8080:80
+      - 8080:80
     networks:
       - <project_name>-network
 
   redis:
     image: redis
     ports:
-     - 6379
+      - 6379
     networks:
       - <project_name>-network
 
   redis-session:
     image: redis
     ports:
-     - 6379
+      - 6379
     networks:
       - <project_name>-network
 
