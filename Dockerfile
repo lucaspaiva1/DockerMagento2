@@ -50,7 +50,9 @@ RUN apt-get install -y libzip-dev zip; \
   	pdo_mysql \
   	soap \
   	xsl \
-  	zip
+  	zip \
+	sockets
+
 
 # Install oAuth
 
