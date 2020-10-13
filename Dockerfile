@@ -69,8 +69,6 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh;
     # && npm i -g grunt-cli yarn
 
-CMD ["npm", "npm i -g grunt-cli yarn"]
-
 # Install Composer
 
 RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
