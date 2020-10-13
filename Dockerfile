@@ -1,6 +1,6 @@
 FROM php:7.4-apache
 
-MAINTAINER Rafael Corrêa Gomes <rafaelcgstz@gmail.com>
+MAINTAINER Lucas Paiva <lukspaiva95@gmail.com>
 
 ENV XDEBUG_PORT 9000
 
@@ -22,7 +22,8 @@ RUN apt-get update \
 	apt-utils \
 	gnupg \
 	redis-tools \
-	mysql-client \
+	# mysql-client \
+	mariadb-client \
 	git \
 	vim \
 	wget \
@@ -37,15 +38,15 @@ RUN apt-get update \
 
 # Install Magento Dependencies
 
-RUN docker-php-ext-configure \
-  	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
+RUN apt-get install -y libzip-dev zip; \
+	docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
   	docker-php-ext-install \
   	opcache \
   	gd \
   	bcmath \
   	intl \
-  	mbstring \
-  	mcrypt \
+  	# mbstring \
+  	# mcrypt \
   	pdo_mysql \
   	soap \
   	xsl \
@@ -65,8 +66,10 @@ RUN apt-get update \
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
   	&& apt-get install -y nodejs build-essential \
-    && curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh \
-    && npm i -g grunt-cli yarn
+    && curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh;
+    # && npm i -g grunt-cli yarn
+
+CMD ["npm", "npm i -g grunt-cli yarn"]
 
 # Install Composer
 
